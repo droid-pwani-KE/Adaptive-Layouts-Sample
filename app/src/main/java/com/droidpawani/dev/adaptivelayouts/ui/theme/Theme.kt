@@ -64,7 +64,7 @@ fun AdaptiveLayoutsSampleTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = PetStoreTypography,
         content = content
     )
 }
