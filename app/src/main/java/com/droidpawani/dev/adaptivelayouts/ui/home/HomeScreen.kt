@@ -4,14 +4,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.droidpawani.dev.adaptivelayouts.models.Pet
+import com.droidpawani.dev.adaptivelayouts.ui.components.PetCardLandScape
+import com.droidpawani.dev.adaptivelayouts.ui.components.PetsCardPortrait
 import com.droidpawani.dev.adaptivelayouts.ui.theme.AdaptiveLayoutsSampleTheme
 
 @Composable
@@ -20,6 +27,9 @@ fun HomeScreen(
     viewModel: HomeViewModel,
     onNavigateToPetDetails: (Pet) -> Unit
 ) {
+    LaunchedEffect(key1 = true){
+        viewModel.getPetsList(null)
+    }
     val state = viewModel.homeUiState.collectAsState()
     StatelessHomeScreen(
         uiState = state.value,
@@ -47,11 +57,38 @@ fun StatelessHomeScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "Home destination",
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
-        )
+        val gridCells = if(isExpanded)GridCells.Fixed(2) else GridCells.Fixed(3)
+        LazyVerticalGrid(
+            columns = gridCells ,
+            verticalArrangement = Arrangement.spacedBy(8.dp) ,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ){
+
+            items(items = uiState.petsList){ pet ->
+                if (isExpanded){
+                    PetCardLandScape(
+                        pet = pet ,
+                        onFavourite = {
+                            onToggleFavourite(pet)
+                        } ,
+                        onPetSelected = {
+
+                        }
+                    )
+                }else{
+                    PetsCardPortrait(
+                        pet = pet ,
+                        onFavourite = {
+                            onToggleFavourite(pet)
+                        } ,
+                        onPetSelected = {
+
+                        }
+                    )
+                }
+            }
+
+        }
     }
 }
 

@@ -224,8 +224,7 @@ fun PetCardLandScape(
                             contentAlignment = Alignment.Center
                         ){
                             Text(
-                                text = "Ksh ${pet.price}" ,
-                                modifier = Modifier.fillMaxWidth(),
+                                text = it ,
                                 textAlign = TextAlign.Start ,
                                 style = PetStoreTypography.bodySmall,
                                 fontSize = 6.sp
