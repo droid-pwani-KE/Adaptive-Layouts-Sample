@@ -63,4 +63,9 @@ dependencies {
     androidTestImplementation(libs.compose.ui.test.junit)
     debugImplementation(libs.bundles.compose.test)
 
+
+    //navigation
+    implementation(libs.compose.navigation)
+
+
 }
