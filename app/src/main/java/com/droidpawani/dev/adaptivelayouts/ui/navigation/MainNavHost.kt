@@ -1,16 +1,23 @@
 package com.droidpawani.dev.adaptivelayouts.ui.navigation
 
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.droidpawani.dev.adaptivelayouts.data.AppContainer
+import com.droidpawani.dev.adaptivelayouts.ui.orders.OrdersScreen
+import com.droidpawani.dev.adaptivelayouts.ui.home.HomeScreen
+import com.droidpawani.dev.adaptivelayouts.ui.home.HomeViewModel
+import com.droidpawani.dev.adaptivelayouts.ui.messages.MessagesScreen
 
 @Composable
 fun MainNavHost(
     modifier : Modifier = Modifier,
+    appContainer: AppContainer ,
     windowSizeClass: WindowSizeClass,
     navHostController: NavHostController,
     startDestination : String
@@ -19,14 +26,25 @@ fun MainNavHost(
         navController = navHostController,
         startDestination = startDestination ,
         builder = {
-            composable(NavConstants.home){
-
+            composable(NavConstants.home){ navBackStackEntry ->
+                val homeViewModel: HomeViewModel = viewModel(
+                    factory = HomeViewModel.provideFactory(
+                       petsRepository = appContainer.postsRepository
+                    )
+                )
+                HomeScreen(
+                    viewModel = homeViewModel ,
+                    isExpanded = windowSizeClass.widthSizeClass > WindowWidthSizeClass.Compact ,
+                    onNavigateToPetDetails = {
+                        //navigate to favourites screen
+                    }
+                )
             }
-            composable(NavConstants.orders){
-
+            composable(NavConstants.orders){ navBackStackEntry ->
+                OrdersScreen()
             }
-            composable(NavConstants.messages){
-
+            composable(NavConstants.messages){ navBackStackEntry ->
+                MessagesScreen()
             }
         }
     )

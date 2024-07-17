@@ -15,8 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val petsRepository: PetsRepository ,
-    private val savedStateHandle: SavedStateHandle
+    private val petsRepository: PetsRepository
 ) : ViewModel() {
 
     private val _homeUiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState())
@@ -45,15 +44,20 @@ class HomeViewModel(
         }
     }
 
+    fun toggleFavourite(pet : Pet) = viewModelScope.launch {
+        petsRepository.toggleFavouritePet(pet)
+    }
+
+
+
 
     companion object {
         fun provideFactory(
-            petsRepository: PetsRepository ,
-            savedStateHandle: SavedStateHandle
+            petsRepository: PetsRepository
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(petsRepository , savedStateHandle) as T
+                return HomeViewModel(petsRepository) as T
             }
         }
     }
