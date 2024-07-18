@@ -106,66 +106,9 @@ fun PetStoreApplication(
                         }
                     )
                 }
-            }/*,
-            bottomBar = {
-                if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact) {
-                    //show bottom nav bar here
-                    NavigationBar {
-                        navItems.forEachIndexed { index, item ->
-                            NavigationBarItem(
-                                selected = selectedItemIndex == index,
-                                onClick = {
-                                    selectedItemIndex = index
-                                    //navigate here
-                                    navHostController.navigate(
-                                        item.screens.route
-                                    )
-                                },
-                                icon = {
-                                    Icon(
-                                        imageVector = if (selectedItemIndex == index) item.selectedIcon else item.unselectedIcon,
-                                        contentDescription = ""
-                                    )
-                                })
-                        }
-                    }
-                }
-            }*//*,
-            snackbarHost = {
-                SnackbarHost(hostState = snackBarHostState)
-            }*/
+            }
         ) { innerPadding ->
-            /*if (windowSizeClass.widthSizeClass > WindowWidthSizeClass.Compact) {
-                Row(
-                    Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                ) {
-                    MainRailBar(
-                        navItems = navItems ,
-                        selectedItemIndex = selectedItemIndex ,
-                        navHostController = navHostController ,
-                        onNavItemSelected = { index->
-                            selectedItemIndex = index
-                        }
-                    )
-                    MainNavHost(
-                        modifier = Modifier,
-                        windowSizeClass = windowSizeClass,
-                        navHostController = navHostController,
-                        startDestination = Screens.Home.route ,
-                        appContainer = appContainer
-                    )
-                }
-            } else {
-                MainNavHost(
-                    modifier = Modifier.padding(innerPadding),
-                    windowSizeClass = windowSizeClass,
-                    navHostController = navHostController,
-                    startDestination = Screens.Home.route ,
-                    appContainer = appContainer
-                )
-            }*/
+
             NavigationSuiteScaffold(
                 modifier = Modifier
                     .fillMaxSize()
