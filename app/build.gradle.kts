@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(libs.androidx.material3.adaptive.navigation.suite.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.androidx.ext)
     androidTestImplementation(libs.espresso.core)
